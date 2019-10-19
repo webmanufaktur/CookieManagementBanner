@@ -15,6 +15,5 @@
                 <button class="pwcmb-widget__button js-pwcmb-manage-cookies"><?php print $module->{"manage_btn_text$lang"}; ?></button>
             <?php endif; ?>
         </div>
-        <span class="pwcmb-widget__close js-pwcmb-allow-cookies">Close</span>
     </div>
 </div>
