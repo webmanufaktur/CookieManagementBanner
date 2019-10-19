@@ -1,0 +1,19 @@
+<!-- ++++++++++++++++++++++
+Matomo + Opt-In-Out
++++++++++++++++++++++++ -->
+<script>
+
+// Tracking allowed (OPT-IN)
+if (localStorage.getItem('pwcmbAllowCookies') === 'y') {
+
+    localStorage.setItem("trackingEnabled", true);
+
+    // Load Matomo Tracking Container
+	var _mtm = _mtm || [];
+	_mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://matomo.test/js/container_ABCDEFGH.js'; s.parentNode.insertBefore(g,s);
+    
+}
+
+</script>

@@ -1,0 +1,53 @@
+<!-- ++++++++++++++++++++++
+Google Analytics + Opt-In-Out
++++++++++++++++++++++++ -->
+<script>
+
+// OPT-IN or OPT-OUT not yet set (Default: OPT-OUT)
+if (localStorage.getItem('pwcmbAllowCookies') !== 'y') {
+
+    localStorage.setItem('trackingEnabled', 'false');
+    
+    // Write Google OptOut Cookie
+    document.cookie = 'ga-disable-UA-XXXXXXXX-1=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+
+}
+
+// Tracking blocked (OPT-OUT)
+if (localStorage.getItem('pwcmbAllowCookies') === 'n') {
+
+    localStorage.setItem('trackingEnabled', 'false');
+    
+    // Write Google OptOut Cookie
+    document.cookie = 'ga-disable-UA-XXXXXXXX-1=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+
+};
+
+
+// Tracking allowed (OPT-IN)
+if (localStorage.getItem('pwcmbAllowCookies') === 'y') {
+
+    localStorage.setItem("trackingEnabled", true);
+
+    // Delete Google OptOut Cookie
+    document.cookie = 'ga-disable-UA-XXXXXXXX-1=false; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+
+	// Load Matomo Tracking Container
+	var _mtm = _mtm || [];
+	_mtm.push({'mtm.startTime': (new Date().getTime()), 'event': 'mtm.Start'});
+	var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src='https://matomo.test/js/container_ABCDEFGH.js'; s.parentNode.insertBefore(g,s);
+    
+    // TODO: looking for similar script but loading Google Tag Manager instead
+
+}
+
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXXXXX-1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-XXXXXXXX-1', { 'anonymize_ip': true });
+</script>
