@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 0.4.11 (DEV)
+## Version 0.4.12 (DEV)
 
 * Usage example (assets/html)
 * Removed CLOSE option
