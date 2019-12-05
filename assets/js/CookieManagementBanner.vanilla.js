@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (cookieMonster.cfg.allowStorage) {
                     localStorage.setItem("pwcmbAllowCookies", cookieMonster.cfg.allowCookies);
                     localStorage.setItem("pwcmbSelectionMade", cookieMonster.cfg.selectionMade);
-                    localStorage.setItem("pwcmbVersion", cookieMonster.cfg.storedVersion);
+                    localStorage.setItem("pwcmbVersion", cookieMonster.cfg.version);
                     localStorage.setItem("pwcmbViewCount", cookieMonster.cfg.viewCount);
                 }
             };
@@ -150,10 +150,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 actions: function () {
 
-                    if (cookieMonster.cfg.allowCookies == "y") {
-                        document.querySelector(".js-pwcmb-marketing-pref--y").checked = true;
-                    } else if (cookieMonster.cfg.allowCookies == "n") {
-                        document.querySelector(".js-pwcmb-marketing-pref--n").checked = true;
+                    // Checks if MANAGE option is set.
+                    // Otherwise notice-toggle doesn't work as expected
+                    if( document.querySelector(".pwcmb-widget--manage") ) {
+                        if (cookieMonster.cfg.allowCookies == "y") {
+                            document.querySelector(".js-pwcmb-marketing-pref--y").checked = true;
+                        } else if (cookieMonster.cfg.allowCookies == "n") {
+                            document.querySelector(".js-pwcmb-marketing-pref--n").checked = true;
+                        }
                     }
 
                     cookieMonster.cfg.wrapper.addEventListener("click", filterEventHandler(cookieMonster.cfg.allowClass, function () {
@@ -287,6 +291,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (cookieMonster.cfg.selectionMade !== "y") {
                         cookieMonster.ui.show();
                     }
+                }
+
+                // Resets everything in case of version number change
+                if (cookieMonster.cfg.storedVersion !== null && cookieMonster.cfg.storedVersion !== pwcmb_settings.version) {
+                    localStorage.removeItem("pwcmbAllowCookies");
+                    localStorage.removeItem("pwcmbSelectionMade");
+                    localStorage.removeItem("pwcmbVersion");
+                    localStorage.removeItem("pwcmbViewCount");
+                    cookieMonster.ui.show();
                 }
             };
 
